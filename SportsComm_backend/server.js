@@ -14,7 +14,7 @@ dotenv.config();
 // mongodb+srv://anshul:anshul@cluster0.qn1xp.mongodb.net/sportsComm?retryWrites=true&w=majority
 
 mongoose.connect(
-  "mongodb://localhost/SportsComm",
+  "mongodb://mongo/SportsComm",
   { useNewUrlParser: true, useUnifiedTopology: true },
   function (err, db) {
     if (err) {
