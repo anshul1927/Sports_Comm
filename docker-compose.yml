@@ -1,0 +1,42 @@
+version: "3.1"
+services:
+  mongo:
+    container_name: mongo
+    image: mongo:3.6.23-xenial
+    ports:
+      - "27017:27017"
+    networks:
+      - mearn_app
+    volumes:
+      - mongo_data:/data/db
+
+  frontend:
+    container_name: frontend
+    stdin_open: true
+    restart: always
+    build: ./SportsComm_web
+    ports:
+      - "3002:80"
+    depends_on:
+      - backend
+    networks:
+      - mearn_app
+
+  backend:
+    container_name: backend
+    restart: always
+    build: ./SportsComm_backend
+    ports:
+      - "4000:4000"
+    depends_on:
+      - mongo
+    networks:
+      - mearn_app
+
+networks:
+  mearn_app:
+    driver: bridge
+
+volumes:
+  mongo_data:
+    driver: local
